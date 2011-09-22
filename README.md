@@ -13,7 +13,7 @@ if you added a dev-dependency, run with :
 
     lein rtunnel -d user@host.com -r 1234:foo:4567 -k /home/foo/.ssh/id_rsa -pp keypassword --verbose?
 
-run with :
+if you added a regular dependency, run with :
 
     lein run -m clj-ssh-tunnel.core -d user@host.com -r 1234:foo:4567 -k /home/foo/.ssh/id_rsa -pp keypassword --verbose?
 
