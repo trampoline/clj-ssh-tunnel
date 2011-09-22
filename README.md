@@ -1,7 +1,7 @@
 ## clj-ssh-tunnel ##
 
 sets up a reverse ssh tunnel, useful for running on a cloud service to securely tunnel access 
-to resources in the cloud
+to resources otherwise hidden behind the cloud firewall
 
 ## Usage ##
 
