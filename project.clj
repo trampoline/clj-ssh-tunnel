@@ -1,4 +1,4 @@
-(defproject clj-ssh-tunnel "0.1.0"
+(defproject clj-ssh-tunnel "0.1.1"
   :description "a clojure ssh reverse-tunnel tool, using jsch"
   :url "https://github.com/trampoline/clj-ssh-tunnel"
   :main clj-ssh-tunnel.core

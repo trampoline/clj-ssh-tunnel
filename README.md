@@ -7,11 +7,11 @@ to resources otherwise hidden behind the cloud firewall
 
 add a dependency or a dev-dependency to your project.clj
 
-    [clj-ssh-tunnel "0.1.0"]
+    [clj-ssh-tunnel "0.1.1"]
 
 if you added a dev-dependency, run with :
 
-    lein rtunnel -d user@host.com -r 1234:foo:4567 -k /home/foo/.ssh/id_rsa -pp keypassword --verbose?
+    lein tunnel -d user@host.com -r 1234:foo:4567 -k /home/foo/.ssh/id_rsa -pp keypassword --verbose?
 
 if you added a regular dependency, run with :
 
