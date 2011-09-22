@@ -11,11 +11,11 @@ add a dependency or a dev-dependency to your project.clj
 
 if you added a dev-dependency, run with :
 
-    lein tunnel -d user@host.com -r 1234:foo:4567 -k /home/foo/.ssh/id_rsa -pp keypassword --verbose?
+    lein tunnel -d user@host.com -r 1234:foo:4567 -k /home/foo/.ssh/id_rsa -pp keypassword --verbose
 
 if you added a regular dependency, run with :
 
-    lein run -m clj-ssh-tunnel.core -d user@host.com -r 1234:foo:4567 -k /home/foo/.ssh/id_rsa -pp keypassword --verbose?
+    lein run -m clj-ssh-tunnel.core -d user@host.com -r 1234:foo:4567 -k /home/foo/.ssh/id_rsa -pp keypassword --verbose
 
 both these invocations will login as 'user' to 'host.com', authenticating with the ssh private key in '/home/foo/.ssh/id_rsa' 
 which is protected with the password 'keypassword'. once logged in an ssh reverse tunnel will be setup from port 1234 (on host.com)

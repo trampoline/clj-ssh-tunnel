@@ -7,14 +7,14 @@
   (:import (com.jcraft.jsch Session JSch Util Logger))
   (:gen-class))
 
-(defn create-ssl-tunnel [{:keys [dest rtunnel private-key-path passphrase verbose?]}]
+(defn create-ssl-tunnel [{:keys [dest rtunnel private-key-path passphrase verbose]}]
   "setup an ssh reverse-tunnel"
   (do
-    (and true (JSch/setLogger logger))
+    (and verbose (JSch/setLogger logger))
     (let [jsch (JSch.)
           ssh-dest (parse-ssh-destination dest)
           rts (parse-rtunnel-spec rtunnel)]
-      (if verbose?
+      (if verbose
         (do
           (println (strint/<< "ssh destination: ~(:user ssh-dest)@~(:host ssh-dest):~(:port ssh-dest)"))
           (println (strint/<< "rtunnel: ~(:bind-address rts):~(:port rts):~(:host rts):~(:hostport rts)"))))
@@ -36,10 +36,10 @@
         (c/cli
           args
           (c/required ["-d" "--dest" "ssh destination: username@host[:port]"])
-          (c/required ["-r" "--rtunnel" "rtunnel spec: [bind-address:]port[:host:host-port]"])
+          (c/required ["-r" "--rtunnel" "rtunnel spec: [bind-address:]port:host[:host-port]"])
           (c/optional ["-k" "--private-key-path" "Specify path to the private key" :default ".ssh/id_rsa"])
           (c/optional ["-pp" "--passphrase" "private key passphrase" :default ""])
-          (c/optional ["-v?" "--verbose?"]))]
+          (c/optional ["-v" "--verbose"]))]
 
     (create-ssl-tunnel opts)))
 
