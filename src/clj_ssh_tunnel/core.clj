@@ -2,8 +2,7 @@
   "create an ssh rtunnel"
   (:use clj-ssh-tunnel.impl)
   (:require [clojure.tools.cli :as c]
-            [clojure.contrib.strint :as strint]
-            [clojure.contrib.str-utils :as stru])
+            [clojure.string :as str])
   (:import (com.jcraft.jsch Session JSch Util Logger))
   (:gen-class))
 
@@ -16,8 +15,8 @@
           rts (parse-rtunnel-spec rtunnel)]
       (if verbose
         (do
-          (println (strint/<< "ssh destination: ~(:user ssh-dest)@~(:host ssh-dest):~(:port ssh-dest)"))
-          (println (strint/<< "rtunnel: ~(:bind-address rts):~(:port rts):~(:host rts):~(:hostport rts)"))))
+          (println (format "ssh destination: %s@%s:%s" (:user ssh-dest) (:host ssh-dest) (:port ssh-dest)))
+          (println (format "rtunnel: %s:%s:%s:%s" (:bind-address rts) (:port rts) (:host rts) (:hostport rts)))))
       (.addIdentity jsch private-key-path (.getBytes passphrase "UTF-8"))
       (let [session (.getSession jsch (:user ssh-dest) (:host ssh-dest) (:port ssh-dest))]
         (doto session
@@ -25,7 +24,7 @@
           (.setDaemonThread false)
           .connect
           (.setPortForwardingR (:bind-address rts) (:port rts) (:host rts) (or (:hostport rts) (:port rts)))))
-      (println (strint/<< "tunnel created with endpoint: ~(stru/str-join \":\" (filter identity [(:bind-address rts) (:host ssh-dest) (:port rts)]))"))
+      (println (format "tunnel created with endpoint: %s" (str/join ":" (filter identity [(:bind-address rts) (:host ssh-dest) (:port rts)]))))
       (flush)
       (while true (Thread/sleep 1000)))))
 
